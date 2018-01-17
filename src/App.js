@@ -6,8 +6,12 @@ import logo from './logo.svg';
 import './App.css';
 
 import { ping } from './ping';
+import { loadRepos } from './repos';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.loadRepos()
+  }
   render() {
     return (
       <div className="App">
@@ -22,7 +26,12 @@ class App extends Component {
           <h1>is pinging: {this.props.isPinging.toString()}</h1>
           <button onClick={this.props.ping}>Start PING</button>
         </div>
-
+        <div>
+          <h1>is loading: {String(this.props.repos.loading)}</h1>
+          {this.props.repos.data.map(repo => (
+            <p key={repo.name}>{repo.name}</p>
+          ))}
+        </div>
       </div>
     );
   }
@@ -30,13 +39,15 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    isPinging: state.isPinging
+    isPinging: state.ping.isPinging,
+    repos: state.repos
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    ping: bindActionCreators(ping, dispatch)
+    ping: bindActionCreators(ping, dispatch),
+    loadRepos: bindActionCreators(loadRepos, dispatch),
   }
 }
 

@@ -1,13 +1,22 @@
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
+import logger from 'redux-logger';
 
-import { pingEpic, pingReducer } from './ping'
+import rootEpic from './rootEpics'
+import rootReducer from './rootReducers'
 
-const epicMiddleware = createEpicMiddleware(pingEpic);
+const middleWares = []
+if (process.env.NODE_ENV === 'development') {
+  middleWares.push(logger)
+}
+const epicMiddleware = createEpicMiddleware(rootEpic)
+middleWares.push(epicMiddleware)
 
-const store = createStore(pingReducer,
-  applyMiddleware(epicMiddleware)
-);
+const composeEnhancers = compose
+const enhancer = composeEnhancers(applyMiddleware(...middleWares))
 
-export default store;
+export default function configureStore(initialState) {
+  const store = createStore(rootReducer, initialState, enhancer)
+  return store
+}

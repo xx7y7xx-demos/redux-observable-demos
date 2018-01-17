@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs'; // eslint-disable-line
 
 const PING = 'PING';
 const PONG = 'PONG';
