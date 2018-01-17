@@ -10,8 +10,11 @@ const LOAD = 'repos/LOAD';
 const SUCCESS = 'repos/SUCCESS';
 const FAILURE = 'repos/FAILURE';
 
-export const loadRepos = () => ({
+export const loadRepos = (name) => ({
   type: LOAD,
+  payload: {
+    name,
+  },
 });
 export const loadSuccess = (res) => ({
   type: SUCCESS,
@@ -25,8 +28,8 @@ export const loadFailure = () => ({
 
 export const reposEpic = action$ =>
   action$.ofType(LOAD)
-    .switchMap(() => {
-      return axios.get('https://api.github.com/users/xxd3vin/repos?' + Math.random())
+    .mergeMap((action) => {
+      return axios.get(`https://api.github.com/users/${action.payload.name}/repos?${Math.random()}`)
     })
     .map(loadSuccess)
 

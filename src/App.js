@@ -10,7 +10,7 @@ import { loadRepos } from './repos';
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadRepos()
+    this.props.loadRepos('xxd3vin')
   }
   render() {
     return (
@@ -27,10 +27,10 @@ class App extends Component {
           <button onClick={this.props.ping}>Start PING</button>
         </div>
         <div>
-          <h1>is loading: {String(this.props.repos.loading)}</h1>
-          {this.props.repos.data.map(repo => (
+          <h1>repos is loading: {String(this.props.repos.loading)}</h1>
+          {/*this.props.repos.data.map(repo => (
             <p key={repo.name}>{repo.name}</p>
-          ))}
+          ))*/}
         </div>
       </div>
     );
