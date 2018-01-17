@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+
 import logo from './logo.svg';
 import './App.css';
+
+import { ping } from './ping';
 
 class App extends Component {
   render() {
@@ -13,9 +18,26 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <div>
+          <h1>is pinging: {this.props.isPinging.toString()}</h1>
+          <button onClick={this.props.ping}>Start PING</button>
+        </div>
+
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isPinging: state.isPinging
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ping: bindActionCreators(ping, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
