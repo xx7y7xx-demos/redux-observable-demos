@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 
 import { pingEpic } from './ping';
-import { reposEpic } from './repos';
+import { reposEpic } from './redux/modules/repos';
 
 const rootEpic = combineEpics(
   pingEpic,

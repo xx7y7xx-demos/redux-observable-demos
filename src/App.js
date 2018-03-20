@@ -6,7 +6,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import { ping } from './ping';
-import { loadRepos } from './repos';
+import { loadRepos } from './redux/modules/repos';
 
 class App extends Component {
   componentDidMount() {
