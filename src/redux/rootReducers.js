@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
 // App level store
-import { pingReducer } from './ping';
-import { reposReducer } from './redux/modules/repos';
+import { pingReducer } from './modules/ping';
+import { reposReducer } from './modules/repos';
 
 const rootReducer = combineReducers({
   ping: pingReducer,

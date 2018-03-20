@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
-import { ping } from './ping';
+import { ping } from './redux/modules/ping';
 import { loadRepos } from './redux/modules/repos';
 
 class App extends Component {
