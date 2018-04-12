@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-import { ping } from './redux/modules/ping';
-import { loadRepos } from './redux/modules/repos';
+import { ping } from "./redux/modules/ping";
+import { loadRepos } from "./redux/modules/repos";
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadRepos('xxd3vin')
+    this.props.loadRepos("xxd3vin");
   }
   render() {
     return (
@@ -28,6 +28,7 @@ class App extends Component {
         </div>
         <div>
           <h1>repos is loading: {String(this.props.repos.loading)}</h1>
+          <h1>repo is loading: {String(this.props.repos.repoLoading)}</h1>
           {/*this.props.repos.data.map(repo => (
             <p key={repo.name}>{repo.name}</p>
           ))*/}
@@ -41,14 +42,14 @@ function mapStateToProps(state) {
   return {
     isPinging: state.ping.isPinging,
     repos: state.repos
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     ping: bindActionCreators(ping, dispatch),
-    loadRepos: bindActionCreators(loadRepos, dispatch),
-  }
+    loadRepos: bindActionCreators(loadRepos, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
